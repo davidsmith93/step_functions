@@ -1,0 +1,16 @@
+{
+   "StartAt":"HELLO",
+   "States":{
+      "HELLO":{
+         "Type":"Task",
+         "Resource":"arn:aws:states:::lambda:invoke",
+         "Parameters":{
+            "FunctionName":"hello_lambda",
+            "Payload":{
+               "Input.$":"$"
+            }
+         },
+        "End": true
+      }
+   }
+}

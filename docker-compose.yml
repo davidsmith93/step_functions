@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    localstack:
+        image: localstack/localstack:latest
+        ports:
+          - '4574:4574'
+          - '4585:4585'
+          - '${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}'
+        environment:
+          - SERVICES=lambda,stepfunctions
+          - PORT_WEB_UI=8080
+          - LAMBDA_EXECUTOR=local
+          - HOST_TMP_FOLDER=/tmp/localstack
+        volumes:
+        - /tmp/localstack:/tmp/localstack
