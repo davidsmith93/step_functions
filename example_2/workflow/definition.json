@@ -1,0 +1,27 @@
+{
+   "StartAt":"PRE",
+   "States":{
+      "PRE":{
+         "Type":"Task",
+         "Resource":"arn:aws:states:::lambda:invoke",
+         "Parameters":{
+            "FunctionName.$":"$.pre",
+            "Payload":{
+               "Input.$":"$"
+            }
+         },
+        "Next": "POST"
+      },
+      "POST":{
+         "Type":"Task",
+         "Resource":"arn:aws:states:::lambda:invoke",
+         "Parameters":{
+            "FunctionName.$":"$.Payload.Input.post",
+            "Payload":{
+               "Input.$":"$.Payload.Input"
+            }
+         },
+         "End": true
+      }
+   }
+}
